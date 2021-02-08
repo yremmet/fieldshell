@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 apt-get update
-apt-get install -y apt-utils apt-transport-https gnupg2 curl locales
+apt-get install -y curl
 
 curl https://gist.githubusercontent.com/yremmet/1a77ac70b1a24cb901e28233219c5663/raw/b93d4a52be6e5572998ef1deb1f172599a68f919/output.sh -o output.sh
 
@@ -12,10 +12,11 @@ locale-gen en_US.UTF-8
 header "APT INSTALL"
 # Kubectl
 info "adding kubectl source"
+apt-get install -y --no-install-recommends apt-utils apt-transport-https gnupg2  locales
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list
 apt-get update
-info install packages
+info install  packages
 apt-get install -y kubectl \
 kafkacat \
 python3-pip \
@@ -30,6 +31,7 @@ php
 
 header "APT CLEAN"
 apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 header "PIP"
 pip3 install docker-compose \
