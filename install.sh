@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 apt-get update
-apt-get install -y curl
+apt-get install -y curl locales
 
 curl https://gist.githubusercontent.com/yremmet/1a77ac70b1a24cb901e28233219c5663/raw/b93d4a52be6e5572998ef1deb1f172599a68f919/output.sh -o output.sh
 
@@ -12,7 +12,7 @@ locale-gen en_US.UTF-8
 header "APT INSTALL"
 # Kubectl
 info "adding kubectl source"
-apt-get install -y --no-install-recommends apt-utils apt-transport-https gnupg2  locales
+apt-get install -y --no-install-recommends apt-utils apt-transport-https gnupg2
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - 
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list
 apt-get update
@@ -43,3 +43,6 @@ jupyterlab
 
 header "OHMYZSH"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+header "neoVIM"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/oh-my-neovim/oh-my-neovim/master/tools/install.sh)"
