@@ -1,9 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 apt-get update
-apt-get install -y curl locales
-
-curl https://gist.githubusercontent.com/yremmet/1a77ac70b1a24cb901e28233219c5663/raw/b93d4a52be6e5572998ef1deb1f172599a68f919/output.sh -o output.sh
+apt-get install -y curl locales 
+curl https://gist.github.com/yremmet/1a77ac70b1a24cb901e28233219c5663/raw -Lo /output.sh
 
 . ./output.sh
 header "Setup Locale"
@@ -27,11 +26,11 @@ mongodb \
 docker.io \
 zsh \
 ruby \
+tmux \
 php
 
 header "APT CLEAN"
 apt-get clean
-rm -rf /var/lib/apt/lists/*
 
 header "PIP"
 pip3 install docker-compose \
@@ -44,5 +43,9 @@ jupyterlab
 header "OHMYZSH"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-header "neoVIM"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/oh-my-neovim/oh-my-neovim/master/tools/install.sh)"
+header "TMUX"
+cd /root
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
+
