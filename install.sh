@@ -49,3 +49,5 @@ git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
 
+header "CodeServer"
+curl -fsSL https://code-server.dev/install.sh | sh -s --
