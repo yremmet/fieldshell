@@ -16,29 +16,33 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/kubernetes.list
 apt-get update
 info install  packages
-apt-get install -y kubectl \
-kafkacat \
-python3-pip \
-neovim \
+apt-get install -y \
 ansible \
-postgresql \
-mongodb \
 docker.io \
-zsh \
-ruby \
+git \
+kubectl \
+kafkacat \
+mongodb \
+neovim \
+php \
+postgresql \
+python3-pip \
+ruby ruby-dev \
 tmux \
-php
+zsh 
 
 header "APT CLEAN"
 apt-get clean
 
 header "PIP"
-pip3 install docker-compose \
+pip3 install \
 docker \
+docker-compose \
+jupyterlab \
 kafka-utils \
+ksql \
 numpy \
 pandas \
-jupyterlab
 
 header "OHMYZSH"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
