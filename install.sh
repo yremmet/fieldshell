@@ -28,6 +28,7 @@ php \
 postgresql \
 python3-pip \
 ruby ruby-dev \
+sshpass \
 tmux \
 zsh 
 
