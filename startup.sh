@@ -12,5 +12,5 @@ password: ${CODE_SERVER_PASSWORD}
 cert: true
 " > /root/.config/code-server/config.yaml
 
-sudo systemctl enable --now code-server@$USER
+code-server & 2> /var/logs/codeshell.stderr.log > /var/logs/codeshell.stdout.log
 zsh
