@@ -1,0 +1,44 @@
+---
+version: "3.7"
+services:
+  code:
+    image: enat/code-server
+    container_name: code
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PASSWORD=password #optional
+    volumes:
+      - ${WORKSPACE_DIR}:/config/workspace
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+  jupyter:
+    image: jupyter/base-notebook
+    container_name: jupyter
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - 8888:8888
+    volumes:
+      - ${WORKSPACE_DIR}:/work
+  iacbox:
+    image: enat/iacbox
+    container_name: shell
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${WORKSPACE_DIR}:/workspace
+      - ${HOME}/.ssh/:/root/.ssh/
+      - ${HISTFILE}:/root/home/.zhistor
+
+
+
+
